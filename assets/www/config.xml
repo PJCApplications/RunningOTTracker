@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.codiqa.project" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>CodiqaProject</name>
-    <description>
-        A Codiqa application that responds to the deviceready event.
+    <name>RunningOTTracker
+        A phone app to track the running overtime from work.
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
