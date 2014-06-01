@@ -17,7 +17,7 @@ function successCallBack() {
 
     }
 
-function nullHandler(){};
+function nullHandler(){}
 
 // called when the application loads
 function onBodyLoad(){
@@ -77,7 +77,7 @@ function ListDBValues() {
     },errorHandler);
     },errorHandler,nullHandler);
 
-    return;
+    //return;
 
     }
 
@@ -96,6 +96,6 @@ function AddValueToDB() {
 // this calls the function that will show what is in the User table in the database
     ListDBValues();
 
-    return false;
+    //return false;
 
     }
