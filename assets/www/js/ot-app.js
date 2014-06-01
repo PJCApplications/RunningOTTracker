@@ -1,5 +1,1 @@
-$(function() {
-        
-        //Insert code here
-        
-        });
+$(function(){});
