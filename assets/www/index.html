@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+
+
+
 </head>
 
 <body>
@@ -19,19 +24,9 @@
               Add OT
           </h3>
       </div>
+
       <div data-role="content">
-          <div data-role="fieldcontain" data-controltype="dateinput">
-              <label for="dateinput3">
-                  Date
-              </label>
-              <input name="" id="dateinput3" placeholder="" value="01/06/2014" type="date">
-          </div>
-          <div data-role="fieldcontain" data-controltype="dateinput">
-              <label for="dateinput2">
-                  Time
-              </label>
-              <input name="" id="dateinput2" placeholder="" value="08:30" type="time">
-          </div>
+
           <div data-role="fieldcontain" data-controltype="selectmenu">
               <label for="selectmenu1">
                   Choose:
@@ -54,6 +49,20 @@
                   </option>
               </select>
           </div>
+
+          <div data-role="fieldcontain" data-controltype="dateinput">
+              <label for="dateinput3">
+                  Date
+              </label>
+              <input name="" id="dateinput3" placeholder="" value="01/06/2014" type="date">
+          </div>
+          <div data-role="fieldcontain" data-controltype="dateinput">
+              <label for="dateinput2">
+                  Time
+              </label>
+              <input name="" id="dateinput2" placeholder="" value="08:30" type="time">
+          </div>
+
           <div data-role="fieldcontain" data-controltype="textinput">
               <label for="textinput1">
                   CAD Number:
@@ -74,26 +83,24 @@
           </div>
           <input type="submit" value="Submit">
       </div>
-      <div data-role="tabbar" data-iconpos="top" data-theme="a">
-          <ul>
-              <li>
-                  <a href="#AddOT" data-transition="fade" data-theme="" data-icon="plus">
-                      Add OT
-                  </a>
-              </li>
-              <li>
-                  <a href="#EditOT" data-transition="fade" data-theme="" data-icon="edit">
-                      Edit OT
-                  </a>
-              </li>
-              <li>
-                  <a href="#ViewOT" data-transition="fade" data-theme="" data-icon="bars">
-                      View OT
-                  </a>
-              </li>
-          </ul>
+
+
+      <!-- Footer/Navbar ----------------------------------------------------------------------------------------->
+      <div data-role="footer" data-id="foo1" data-position="fixed">
+          <div data-role="navbar" data-iconpos="top">
+              <ul>
+                  <li><a href="#AddOT" data-icon="plus" class="ui-btn-active ui-state-persist">Add OT</a></li>
+                  <li><a href="#EditOT" data-icon="gear">Edit OT</a></li>
+                  <li><a href="#ViewOT" data-icon="grid">View OT</a></li>
+              </ul>
+          </div><!-- /navbar -->
       </div>
+      <!-- End of Footer/Navbar ---------------------------------------------------------------------------------->
+
   </div>
+
+
+
   <div data-role="page" data-control-title="EditOT" id="EditOT">
       <div data-theme="a" data-role="header">
           <h3>
@@ -102,26 +109,23 @@
       </div>
       <div data-role="content">
       </div>
-      <div data-role="tabbar" data-iconpos="top" data-theme="a">
-          <ul>
-              <li>
-                  <a href="#AddOT" data-transition="fade" data-theme="" data-icon="plus">
-                      Add OT
-                  </a>
-              </li>
-              <li>
-                  <a href="#EditOT" data-transition="fade" data-theme="" data-icon="edit">
-                      Edit OT
-                  </a>
-              </li>
-              <li>
-                  <a href="#ViewOT" data-transition="fade" data-theme="" data-icon="bars">
-                      View OT
-                  </a>
-              </li>
-          </ul>
+
+      <!-- Footer/Navbar ----------------------------------------------------------------------------------------->
+      <div data-role="footer" data-id="foo1" data-position="fixed">
+          <div data-role="navbar" data-iconpos="top">
+              <ul>
+                  <li><a href="#AddOT" data-icon="plus">Add OT</a></li>
+                  <li><a href="#EditOT" data-icon="gear" class="ui-btn-active ui-state-persist">Edit OT</a></li>
+                  <li><a href="#ViewOT" data-icon="grid">View OT</a></li>
+              </ul>
+          </div><!-- /navbar -->
       </div>
+      <!-- End of Footer/Navbar ---------------------------------------------------------------------------------->
+
   </div>
+
+
+
   <div data-role="page" data-control-title="ViewOT" id="ViewOT">
       <div data-theme="a" data-role="header">
           <h3>
@@ -136,25 +140,19 @@
               </b>
           </div>
       </div>
-      <div data-role="tabbar" data-iconpos="top" data-theme="a">
-          <ul>
-              <li>
-                  <a href="#AddOT" data-transition="fade" data-theme="" data-icon="plus">
-                      Add OT
-                  </a>
-              </li>
-              <li>
-                  <a href="#EditOT" data-transition="fade" data-theme="" data-icon="edit">
-                      Edit OT
-                  </a>
-              </li>
-              <li>
-                  <a href="#ViewOT" data-transition="fade" data-theme="" data-icon="bars">
-                      View OT
-                  </a>
-              </li>
-          </ul>
+
+      <!-- Footer/Navbar ----------------------------------------------------------------------------------------->
+      <div data-role="footer" data-id="foo1" data-position="fixed">
+          <div data-role="navbar" data-iconpos="top">
+              <ul>
+                  <li><a href="#AddOT" data-icon="plus">Add OT</a></li>
+                  <li><a href="#EditOT" data-icon="gear">Edit OT</a></li>
+                  <li><a href="#ViewOT" data-icon="grid" class="ui-btn-active ui-state-persist">View OT</a></li>
+              </ul>
+          </div><!-- /navbar -->
       </div>
+      <!-- End of Footer/Navbar ---------------------------------------------------------------------------------->
+
   </div>
 </body>
 </html>
