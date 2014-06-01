@@ -1,6 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name=viewport content="user-scalable=no,width=device-width" />
+    <link rel=stylesheet href=jquery.mobile/jquery.mobile.css />
+    <script src=jquery.js></script>
+    <script src=jquery.mobile/jquery.mobile.js></script>
+</head>
+
+<body>
+
+<div data-role=page id=home>
+    <div data-role=header>
+        <h1>Home</h1>
+    </div>
+
+    <div data-role=content>
+        <a href=# data-role=button id=create> Create customers table </a>
+        <a href=# data-role=button id=remove> Delete customers table </a>
+        <span> Last name </span>
+        <input type=text id=lname>
+        <span> First name </span>
+        <input type=text id=fname>
+        <a href=# data-role=button id=insert> Insert the customer </a>
+        <a href=# data-role=button id=list> List customers </a>
+    </div>
+</div>
+
+<div data-role=page id=win2 data-add-back-btn=true>
+    <div data-role=header>
+        <h1>List of customers</h1>
+    </div>
+
+    <div data-role=content>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html>
+<head>
     <title>Running OT Tracker</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,9 +68,9 @@
 
     <script type="text/javascript" charset="utf-8" src="js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.4.2.js"></script>
-    <!--
+    &lt;!&ndash;
     <script type="text/javascript" charset="utf-8" src="js/ot-app.js"></script>
-    -->
+    &ndash;&gt;
 
 
 
@@ -30,7 +85,7 @@
       </div>
 
       <div data-role="content">
-<!--
+&lt;!&ndash;
           <div data-role="fieldcontain" data-controltype="selectmenu">
               <label for="selectmenu1">
                   Choose:
@@ -87,7 +142,7 @@
           </div>
           <input type="submit" value="Submit">
       </div>
---!><!-->
+--!>&lt;!&ndash;dash;&gt;
       <h1>WebSQL</h1>
 
           <a href=# data-role=button id=create> Create customers table </a>
@@ -99,7 +154,7 @@
           <a href=# data-role=button id=list> List customers </a>
 
 
-
+&lt;!&ndash;
       <br>
 
 
@@ -108,16 +163,16 @@
       <span id="lbUsers"></span>
 
 
-      <!-- Footer/Navbar ----------------------------------------------------------------------------------------->
+      &lt;!&ndash; Footer/Navbar ---------------------------------------------------------------------------------------&ndash;&gt;
       <div data-role="footer" data-id="foo1" data-position="fixed">
           <div data-role="navbar" data-iconpos="top">
               <ul>
                   <li><a href="#AddOT" data-icon="plus" class="ui-btn-active ui-state-persist">Add OT</a></li>
                   <li><a href="#ViewOT" data-icon="grid">View OT</a></li>
               </ul>
-          </div><!-- /navbar -->
+          </div>&lt;!&ndash; /navbar &ndash;&gt;
       </div>
-      <!-- End of Footer/Navbar ---------------------------------------------------------------------------------->
+      &lt;!&ndash; End of Footer/Navbar --------------------------------------------------------------------------------&ndash;&gt;
 
   </div>
 
@@ -139,29 +194,20 @@
           </div>
       </div>
 
-      <!-- Footer/Navbar ----------------------------------------------------------------------------------------->
+      &lt;!&ndash; Footer/Navbar ---------------------------------------------------------------------------------------&ndash;&gt;
       <div data-role="footer" data-id="foo1" data-position="fixed">
           <div data-role="navbar" data-iconpos="top">
               <ul>
                   <li><a href="#AddOT" data-icon="plus">Add OT</a></li>
                   <li><a href="#ViewOT" data-icon="grid" class="ui-btn-active ui-state-persist">View OT</a></li>
               </ul>
-          </div><!-- /navbar -->
+          </div>&lt;!&ndash; /navbar &ndash;&gt;
       </div>
-      <!-- End of Footer/Navbar ---------------------------------------------------------------------------------->
+      &lt;!&ndash; End of Footer/Navbar --------------------------------------------------------------------------------&ndash;&gt;
 
-  </div>
 
-      <div data-role=page id=win2 data-add-back-btn=true>
-          <div data-role=header>
-              <h1>List of customers</h1>
-          </div>
-
-          <div data-role=content>
-          </div>
-      </div>
 </body>
-</html>
+</html>-->
 
 <script>
 
