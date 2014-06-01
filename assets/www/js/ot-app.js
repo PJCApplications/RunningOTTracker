@@ -13,7 +13,7 @@ function onDeviceReady()
             return;
         }
 
-        var db = window.openDatabase("OTDB", "1.0", "OTDB", 1000000);
+        var db = window.openDatabase("OTDB", "1.0", "Running OT Tracker DB", 65535);
 
         alert("DEBUGGING: we now leaving the onDeviceReady() function");
     }
