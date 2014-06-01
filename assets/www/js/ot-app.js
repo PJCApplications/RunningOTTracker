@@ -3,7 +3,7 @@ var db;
 var shortName = 'OT_DB';
 var version = '1.0';
 var displayName = 'OT_DB';
-var maxSize = 65535;
+var maxSize = 1000000;
 
 // this is called when an error happens in a transaction
 function errorHandler(transaction, error) {
@@ -35,7 +35,7 @@ function onBodyLoad(){
 
 // this line tries to open the database base locally on the device
 // if it does not exist, it will create it and return a database object stored in variable db
-    db = openDatabase(shortName, version, displayName,maxSize);
+    db = window.openDatabase(shortName, version, displayName,maxSize);
 
 // this line will try to create the table User in the database just created/openned
     db.transaction(function(tx){
