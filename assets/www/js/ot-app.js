@@ -1,107 +1,66 @@
-// global variables
-var db;
-var shortName = 'OTDB';
-var version = '1.0';
-var displayName = 'OTDB';
-var maxSize = 1000000;
+// Wait for PhoneGap to load
+document.addEventListener("deviceready", onDeviceReady, false);
 
-// this is called when an error happens in a transaction
-function errorHandler(transaction, error) {
-    alert('Error: ' + error.message + ' code: ' + error.code);
+// PhoneGap is ready
+function onDeviceReady()
+    {
+        alert("DEBUGGING: we are in the onDeviceReady() function");
 
+        if (!window.openDatabase) {
+            // not all mobile devices support databases  if it does not, the following alert will display
+            // indicating the device will not be albe to run this application
+            alert('Databases are not supported on this device.');
+            return;
+        }
+
+        var db = window.openDatabase("OTDB", "1.0", "OTDB", 1000000);
     }
 
-// this is called when a successful transaction happens
-function successCallBack() {
-    alert("DEBUGGING: success");
-
+//Check DB table and create if not there
+function createTable(tx)
+    {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+        db.transaction(populateDB, errorCB, successCB);
     }
 
-function nullHandler(){}
-
-// called when the application loads
-function onBodyLoad(){
-
-// This alert is used to make sure the application is loaded correctly
-// you can comment this out once you have the application working
-    alert("DEBUGGING: we are in the onBodyLoad() function");
-
-    if (!window.openDatabase) {
-    // not all mobile devices support databases  if it does not, the following alert will display
-    // indicating the device will not be albe to run this application
-    alert('Databases are not supported in this browser.');
-    return;
+// Populate the database
+function populateDB(tx)
+    {
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
     }
 
-// this line tries to open the database base locally on the device
-// if it does not exist, it will create it and return a database object stored in variable db
-    db = window.openDatabase(shortName, version, displayName,maxSize);
-
-// this line will try to create the table User in the database just created/openned
-    db.transaction(function(tx){
-
-    // you can uncomment this next line if you want the User table to be empty each time the application runs
-    // tx.executeSql( 'DROP TABLE User',nullHandler,nullHandler);
-
-    // this line actually creates the table User if it does not exist and sets up the three columns and their types
-    // note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
-    // easily from the table.
-        tx.executeSql( 'CREATE TABLE IF NOT EXISTS User(UserId INTEGER NOT NULL PRIMARY KEY, FirstName TEXT NOT NULL, LastName TEXT NOT NULL)',
-            [],nullHandler,errorHandler);
-    },errorHandler,successCallBack);
-
-    alert("DEBUGGING: DB Table creation function ran");
+// Transaction error callback
+function errorCB(tx, err)
+    {
+        alert("Error processing SQL: "+err);
     }
 
-// list the values in the database to the screen using jquery to update the #lbUsers element
-function ListDBValues() {
-
-    alert("DEBUGGING: we are in the ListDBValues() function");
-
-    if (!window.openDatabase) {
-    alert('Databases are not supported in this browser.');
-    return;
+// Transaction success callback
+function successCB()
+    {
+        alert("success!");
     }
 
-// this line clears out any content in the #lbUsers element on the page so that the next few lines will show updated
-// content and not just keep repeating lines
-    $('#lbUsers').html('');
-
-// this next section will select all the content from the User table and then go through it row by row
-// appending the UserId  FirstName  LastName to the  #lbUsers element on the page
-    db.transaction(function(transaction) {
-        transaction.executeSql('SELECT * FROM User;', [],
-            function(transaction, result) {
-                if (result != null && result.rows != null) {
-                    for (var i = 0; i < result.rows.length; i++) {
-                        var row = result.rows.item(i);
-                        $('#lbUsers').append('<br>' + row.UserId + '. ' +
-                            row.FirstName+ ' ' + row.LastName);
-                    }
-                }
-            },errorHandler);
-    },errorHandler,nullHandler);
-
-    return;
-
+// Query the database
+function queryDB(tx)
+    {
+        tx.executeSql('SELECT * FROM OTDB', [], querySuccess, QerrorCB);
     }
 
-// this is the function that puts values into the database using the values from the text boxes on the screen
-function AddValueToDB() {
-
-    alert('DEBUGGING: we are in the AddValueToDB() function #txFirstName #txLastName');
-
-    if (!window.openDatabase) {
-    alert('Databases are not supported in this browser.');
-    return;
+// Query the success callback
+function querySuccess(tx, results)
+    {
+        var len = results.rows.length;
+        console.log("DEMO table: " + len + " rows found.");
+        for (var i=0; i<len; i++)
+            {
+                console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+            }
     }
 
-// this is the section that actually inserts the values into the User table
-    db.transaction(function(transaction) {transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)',[],$('Paul').val(), $('Cartwright').val(),[], nullHandler,errorHandler);});
-
-// this calls the function that will show what is in the User table in the database
-    ListDBValues();
-
-    return false;
-
+    // Transaction error callback
+    //
+    function QerrorCB(err) {
+        console.log("Error processing SQL: "+err.code);
     }

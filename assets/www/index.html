@@ -83,10 +83,16 @@
       </div>
 --!><!-->
       <h1>WebSQL</h1>
-      <input id="txFirstName" type="text" placeholder="FirstName">
-      <input id="txLastName" type="text" placeholder="Last Name">
-      <input type="button" value="Add record" onClick="AddValueToDB()">
-      <input type="button" value="Refresh" onClick="ListDBValues()"> <br>
+
+      <input type="button" value="Create Table" onClick="createTable()">
+
+      <input type="button" value="Populate DB" onClick="populateDB()">
+
+      <input type="button" value="Query DB" onClick="queryDB()">
+
+      <br>
+
+
       <br>
       <span style="font-weight:bold;">Currently stored values:</span>
       <span id="lbUsers"></span>
