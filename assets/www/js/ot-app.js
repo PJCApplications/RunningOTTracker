@@ -19,6 +19,7 @@ function onDeviceReady()
 //Check DB table and create if not there
 function createTable(tx)
     {
+        alert("DEBUGGING: we are in the createTable() function");
         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
         db.transaction(populateDB, errorCB, successCB);
     }
@@ -26,6 +27,7 @@ function createTable(tx)
 // Populate the database
 function populateDB(tx)
     {
+        alert("DEBUGGING: we are in the populateDB() function");
         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
     }
@@ -45,22 +47,24 @@ function successCB()
 // Query the database
 function queryDB(tx)
     {
+        alert("DEBUGGING: we are in the queryDB() function");
         tx.executeSql('SELECT * FROM OTDB', [], querySuccess, QerrorCB);
     }
 
 // Query the success callback
 function querySuccess(tx, results)
     {
+        alert("DEBUGGING: we are in the querySuccess() function");
         var len = results.rows.length;
         console.log("DEMO table: " + len + " rows found.");
         for (var i=0; i<len; i++)
             {
-                console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+                alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
             }
     }
 
     // Transaction error callback
     //
     function QerrorCB(err) {
-        console.log("Error processing SQL: "+err.code);
+        alert("Error querying SQL: "+err.code);
     }
