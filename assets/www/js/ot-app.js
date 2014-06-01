@@ -14,6 +14,8 @@ function onDeviceReady()
         }
 
         var db = window.openDatabase("OTDB", "1.0", "OTDB", 1000000);
+
+        alert("DEBUGGING: we now leaving the onDeviceReady() function");
     }
 
 //Check DB table and create if not there
