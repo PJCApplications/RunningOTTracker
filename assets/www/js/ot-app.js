@@ -77,7 +77,7 @@ function ListDBValues() {
 // this is the function that puts values into the database using the values from the text boxes on the screen
 function AddValueToDB() {
 
-    alert("DEBUGGING: we are in the AddValueToDB() function");
+    alert('DEBUGGING: we are in the AddValueToDB() function #txFirstName #txLastName');
 
     if (!window.openDatabase) {
     alert('Databases are not supported in this browser.');
@@ -85,8 +85,7 @@ function AddValueToDB() {
     }
 
 // this is the section that actually inserts the values into the User table
-    db.transaction(function(transaction) {
-    transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)',[],$('#txFirstName').val(), $('#txLastName').val(),[], nullHandler,errorHandler);});
+    db.transaction(function(transaction) {transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)',[],$('#txFirstName').val(), $('#txLastName').val(),[], nullHandler,errorHandler);});
 
 // this calls the function that will show what is in the User table in the database
     ListDBValues();
