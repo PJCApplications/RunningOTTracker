@@ -53,6 +53,8 @@ function onBodyLoad(){
 // list the values in the database to the screen using jquery to update the #lbUsers element
 function ListDBValues() {
 
+    alert("DEBUGGING: we are in the ListDBValues() function");
+
     if (!window.openDatabase) {
     alert('Databases are not supported in this browser.');
     return;
@@ -93,7 +95,7 @@ function AddValueToDB() {
 
 // this is the section that actually inserts the values into the User table
     db.transaction(function(transaction) {
-    transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)',[$('#txFirstName').val(), $('#txLastName').val()], nullHandler,errorHandler);});
+    transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)',[],$('#txFirstName').val(), $('#txLastName').val(),[], nullHandler,errorHandler);});
 
 // this calls the function that will show what is in the User table in the database
     ListDBValues();
