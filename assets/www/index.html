@@ -224,15 +224,15 @@
 
                         html += "</ul>";
 
-                        $("#win2").unbind ().bind ("pagebeforeshow", function ()
+                        $("#ViewOT").unbind ().bind ("pagebeforeshow", function ()
                         {
-                            var $content = $("#win2 div:jqmData(role=content)");
+                            var $content = $("#ViewOT div:ViewOT(role=content)");
                             $content.html (html);
                             var $ul = $content.find ("ul");
                             $ul.listview ();
                         });
 
-                        $.mobile.changePage ($("#win2"));
+                        $.mobile.changePage ($("#ViewOT"));
 
                     }, error);
         });
