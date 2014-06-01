@@ -22,7 +22,7 @@ function onDeviceReady()
 function createTable(tx)
     {
         alert("DEBUGGING: we are in the createTable() function");
-        db.transaction(tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)'), errorCB, successCB);
+        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
         alert("DEBUGGING: we are now leaving the createTable() function");
     }
 
