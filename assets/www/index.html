@@ -26,10 +26,10 @@
     <div data-role=content>
         <a href=# data-role=button id=create> Create customers table </a>
         <a href=# data-role=button id=remove> Delete customers table </a>
-        <span> Last name </span>
-        <input type=text id=lname>
-        <span> First name </span>
-        <input type=text id=fname>
+        <span> Cad </span>
+        <input type=text id=cad>
+        <span> Vehicle </span>
+        <input type=text id=vehicle>
         <a href=# data-role=button id=insert> Insert the customer </a>
         <a href=# data-role=button id=list> List customers </a>
     </div>
@@ -55,10 +55,10 @@
     {
         db.transaction (function (transaction)
         {
-            var sql = "CREATE TABLE customers " +
+            var sql = "CREATE TABLE overtime " +
                     " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                    "lname VARCHAR(100) NOT NULL, " +
-                    "fname VARCHAR(100) NOT NULL)"
+                    "cad VARCHAR(5) NOT NULL, " +
+                    "vehicle VARCHAR(6) NOT NULL)"
             transaction.executeSql (sql, undefined, function ()
             {
                 alert ("Table created");
@@ -78,15 +78,15 @@
 
     $("#insert").bind ("click", function (event)
     {
-        var lname = $("#lname").val ();
-        var fname = $("#fname").val ();
+        var cad = $("#cad").val ();
+        var vehicle = $("#vehicle").val ();
 
         db.transaction (function (transaction)
         {
-            var sql = "INSERT INTO customers (lname, fname) VALUES (?, ?)";
-            transaction.executeSql (sql, [lname, fname], function ()
+            var sql = "INSERT INTO overtime (cad, vehicle) VALUES (?, ?)";
+            transaction.executeSql (sql, [cad, vehicle], function ()
             {
-                alert ("Customer inserted");
+                alert ("Log inserted");
             }, error);
         });
     });
@@ -95,7 +95,7 @@
     {
         db.transaction (function (transaction)
         {
-            var sql = "SELECT * FROM customers";
+            var sql = "SELECT * FROM overtime";
             transaction.executeSql (sql, undefined,
                     function (transaction, result)
                     {
@@ -105,14 +105,14 @@
                             for (var i = 0; i < result.rows.length; i++)
                             {
                                 var row = result.rows.item (i);
-                                var lname = row.lname;
-                                var fname = row.fname;
-                                html += "<li>" + lname + "&nbsp;" + fname + "</li>";
+                                var cad = row.lname;
+                                var vehicle = row.fname;
+                                html += "<li>" + cad + "&nbsp;" + vehicle + "</li>";
                             }
                         }
                         else
                         {
-                            html += "<li> No customer </li>";
+                            html += "<li> No Logs </li>";
                         }
 
                         html += "</ul>";
