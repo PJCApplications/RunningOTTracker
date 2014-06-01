@@ -151,6 +151,15 @@
       <!-- End of Footer/Navbar ---------------------------------------------------------------------------------->
 
   </div>
+
+      <div data-role=page id=win2 data-add-back-btn=true>
+          <div data-role=header>
+              <h1>List of customers</h1>
+          </div>
+
+          <div data-role=content>
+          </div>
+      </div>
 </body>
 </html>
 
@@ -214,7 +223,12 @@
                                 var row = result.rows.item (i);
                                 var lname = row.lname;
                                 var fname = row.fname;
-                                html += "<li>" + lname + "&nbsp;" + fname + "</li>";
+                                var id = row.id;
+                                html += "<li data-icon=false " + "id=" + id + ">";
+                                html +=   "<a href=#>";
+                                html +=      lname + "&nbsp;" + fname;
+                                html +=   "</a>";
+                                html += "</li>";
                             }
                         }
                         else
@@ -224,15 +238,32 @@
 
                         html += "</ul>";
 
-                        $("#ViewOT").unbind ().bind ("pagebeforeshow", function ()
+                        $("#win2").unbind ().bind ("pagebeforeshow", function ()
                         {
-                            var $content = $("#ViewOT div:ViewOT(role=content)");
+                            var $content = $("#win2 div:jqmData(role=content)");
                             $content.html (html);
                             var $ul = $content.find ("ul");
                             $ul.listview ();
+
+                            $("li").bind ("swiperight", function (event)
+                            {
+                                var id = $(this).attr ("id");
+                                if (!id) return;
+
+                                $(this).remove ();
+
+                                db.transaction (function (transaction)
+                                {
+                                    var sql = "DELETE FROM customers WHERE id=?";
+                                    transaction.executeSql (sql, [id], function ()
+                                    {
+                                        alert ("Customer deleted");
+                                    }, error);
+                                });
+                            });
                         });
 
-                        $.mobile.changePage ($("#ViewOT"));
+                        $.mobile.changePage ($("#win2"));
 
                     }, error);
         });
