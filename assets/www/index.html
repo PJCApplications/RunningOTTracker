@@ -85,6 +85,15 @@
           <input type="submit" value="Submit">
       </div>
 
+      <h1>WebSQL</h1>
+      <input id="txFirstName" type="text" placeholder="FirstName">
+      <input id="txLastName" type="text" placeholder="Last Name">
+      <input type="button" value="Add record" onClick="AddValueToDB()">
+      <input type="button" value="Refresh" onClick="ListDBValues()"> <br>
+      <br>
+      <span style="font-weight:bold;">Currently stored values:</span>
+      <span id="lbUsers"></span>
+
 
       <!-- Footer/Navbar ----------------------------------------------------------------------------------------->
       <div data-role="footer" data-id="foo1" data-position="fixed">
