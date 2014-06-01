@@ -20,8 +20,8 @@ function onDeviceReady()
 function createTable(tx)
     {
         alert("DEBUGGING: we are in the createTable() function");
-        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-        db.transaction(populateDB, errorCB, successCB);
+        db.transaction(tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)'), errorCB, successCB);
+
     }
 
 // Populate the database
