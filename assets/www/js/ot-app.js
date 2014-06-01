@@ -46,8 +46,11 @@ function onBodyLoad(){
     // this line actually creates the table User if it does not exist and sets up the three columns and their types
     // note the UserId column is an auto incrementing column which is useful if you want to pull back distinct rows
     // easily from the table.
-    tx.executeSql( 'CREATE TABLE IF NOT EXISTS User(UserId INTEGER NOT NULL PRIMARY KEY, FirstName TEXT NOT NULL, LastName TEXT NOT NULL)',[],nullHandler,errorHandler);},errorHandler,successCallBack);
+        tx.executeSql( 'CREATE TABLE IF NOT EXISTS User(UserId INTEGER NOT NULL PRIMARY KEY, FirstName TEXT NOT NULL, LastName TEXT NOT NULL)',
+            [],nullHandler,errorHandler);
+    },errorHandler,successCallBack);
 
+    alert("DEBUGGING: DB Table creation function ran");
     }
 
 // list the values in the database to the screen using jquery to update the #lbUsers element
@@ -66,9 +69,18 @@ function ListDBValues() {
 
 // this next section will select all the content from the User table and then go through it row by row
 // appending the UserId  FirstName  LastName to the  #lbUsers element on the page
-    db.transaction(function(transaction) {transaction.executeSql('SELECT * FROM User;', [],function(transaction, result) {if (result != null && result.rows != null)
-    {for (var i = 0; i < result.rows.length; i++) {var row = result.rows.item(i);
-        $('#lbUsers').append('<br>' + row.UserId + '. ' + row.FirstName+ ' ' + row.LastName);}}},errorHandler);},errorHandler,nullHandler);
+    db.transaction(function(transaction) {
+        transaction.executeSql('SELECT * FROM User;', [],
+            function(transaction, result) {
+                if (result != null && result.rows != null) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        $('#lbUsers').append('<br>' + row.UserId + '. ' +
+                            row.FirstName+ ' ' + row.LastName);
+                    }
+                }
+            },errorHandler);
+    },errorHandler,nullHandler);
 
     return;
 
