@@ -23,15 +23,14 @@ function createTable(tx)
     {
         alert("DEBUGGING: we are in the createTable() function");
         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
         alert("DEBUGGING: we are now leaving the createTable() function");
     }
 
-// Populate the database
-function populateDB(tx)
+function runCreateTable()
     {
-        alert("DEBUGGING: we are in the populateDB() function");
-        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+        db.transaction(populateDB, errorCB, successCB);
     }
 
 // Transaction error callback
