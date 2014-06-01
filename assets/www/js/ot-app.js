@@ -1,8 +1,8 @@
 // global variables
 var db;
-var shortName = 'OT_DB';
+var shortName = 'OTDB';
 var version = '1.0';
-var displayName = 'OT_DB';
+var displayName = 'OTDB';
 var maxSize = 1000000;
 
 // this is called when an error happens in a transaction
