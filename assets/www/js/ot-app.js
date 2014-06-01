@@ -56,7 +56,7 @@ function querySuccess(tx, results)
     {
         alert("DEBUGGING: we are in the querySuccess() function");
         var len = results.rows.length;
-        console.log("DEMO table: " + len + " rows found.");
+        alert("DEMO table: " + len + " rows found.");
         for (var i=0; i<len; i++)
             {
                 alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
