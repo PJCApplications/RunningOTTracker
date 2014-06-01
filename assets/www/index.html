@@ -107,12 +107,7 @@
                                 var row = result.rows.item (i);
                                 var lname = row.lname;
                                 var fname = row.fname;
-                                var id = row.id;
-                                html += "<li data-icon=false " + "id=" + id + ">";
-                                html +=   "<a href=#>";
-                                html +=      lname + "&nbsp;" + fname;
-                                html +=   "</a>";
-                                html += "</li>";
+                                html += "<li>" + lname + "&nbsp;" + fname + "</li>";
                             }
                         }
                         else
@@ -128,23 +123,6 @@
                             $content.html (html);
                             var $ul = $content.find ("ul");
                             $ul.listview ();
-
-                            $("li").bind ("swiperight", function (event)
-                            {
-                                var id = $(this).attr ("id");
-                                if (!id) return;
-
-                                $(this).remove ();
-
-                                db.transaction (function (transaction)
-                                {
-                                    var sql = "DELETE FROM customers WHERE id=?";
-                                    transaction.executeSql (sql, [id], function ()
-                                    {
-                                        alert ("Customer deleted");
-                                    }, error);
-                                });
-                            });
                         });
 
                         $.mobile.changePage ($("#win2"));
