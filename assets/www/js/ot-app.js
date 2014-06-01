@@ -66,20 +66,11 @@ function ListDBValues() {
 
 // this next section will select all the content from the User table and then go through it row by row
 // appending the UserId  FirstName  LastName to the  #lbUsers element on the page
-    db.transaction(function(transaction) {
-    transaction.executeSql('SELECT * FROM User;', [],
-    function(transaction, result) {
-    if (result != null && result.rows != null) {
-    for (var i = 0; i < result.rows.length; i++) {
-    var row = result.rows.item(i);
-    $('#lbUsers').append('<br>' + row.UserId + '. ' +
-    row.FirstName+ ' ' + row.LastName);
-    }
-    }
-    },errorHandler);
-    },errorHandler,nullHandler);
+    db.transaction(function(transaction) {transaction.executeSql('SELECT * FROM User;', [],function(transaction, result) {if (result != null && result.rows != null)
+    {for (var i = 0; i < result.rows.length; i++) {var row = result.rows.item(i);
+        $('#lbUsers').append('<br>' + row.UserId + '. ' + row.FirstName+ ' ' + row.LastName);}}},errorHandler);},errorHandler,nullHandler);
 
-    //return;
+    return;
 
     }
 
@@ -100,6 +91,6 @@ function AddValueToDB() {
 // this calls the function that will show what is in the User table in the database
     ListDBValues();
 
-    //return false;
+    return false;
 
     }
