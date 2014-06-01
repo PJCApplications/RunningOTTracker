@@ -30,7 +30,7 @@ function createTable(tx)
 
 function runCreateTable()
     {
-        db.transaction(populateDB, errorCB, successCB);
+        db.transaction(createTableDB, errorCB, successCB);
     }
 
 // Transaction error callback
