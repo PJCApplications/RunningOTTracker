@@ -84,6 +84,8 @@ function ListDBValues() {
 // this is the function that puts values into the database using the values from the text boxes on the screen
 function AddValueToDB() {
 
+    alert("DEBUGGING: we are in the AddValueToDB() function");
+
     if (!window.openDatabase) {
     alert('Databases are not supported in this browser.');
     return;
