@@ -97,7 +97,7 @@ function AddValueToDB() {
     }
 
 // this is the section that actually inserts the values into the User table
-    db.transaction(function(transaction) {transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)',[],$('#txFirstName').val(), $('#txLastName').val(),[], nullHandler,errorHandler);});
+    db.transaction(function(transaction) {transaction.executeSql('INSERT INTO User(FirstName, LastName) VALUES (?,?)',[],$('Paul').val(), $('Cartwright').val(),[], nullHandler,errorHandler);});
 
 // this calls the function that will show what is in the User table in the database
     ListDBValues();
