@@ -67,11 +67,11 @@
         {
             var sql = "CREATE TABLE overtime " +
                     " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                    "datetimelog DATETIME NOT NULL, " +
+                    "datetimelog DATETIME, " +
                     "cad VARCHAR(5), " +
                     "vehicle VARCHAR(10), " +
                     "loc VARCHAR(100), " +
-                    "type VARCHAR(6) NOT NULL, " +
+                    "type VARCHAR(6), " +
                     "notes VARCHAR(250), " +
                     "email VARCHAR(100))";
             transaction.executeSql (sql, undefined, function ()
@@ -93,8 +93,13 @@
 
     $("#insert").bind ("click", function (event)
     {
+        var datetimelog = $("#datetimelog").val ();
         var cad = $("#cad").val ();
         var vehicle = $("#vehicle").val ();
+        var loc = $("#loc").val ();
+        var type = $("#type").val ();
+        var notes = $("#notes").val ();
+        var email = $("#email").val ();
 
         db.transaction (function (transaction)
         {
