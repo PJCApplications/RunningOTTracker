@@ -24,14 +24,24 @@
     </div>
 
     <div data-role=content>
-        <a href=# data-role=button id=create> Create customers table </a>
-        <a href=# data-role=button id=remove> Delete customers table </a>
-        <span> Cad </span>
+        <a href=# data-role=button id=create> Create overtime table </a>
+        <a href=# data-role=button id=remove> Delete overtime table </a>
+        <span> datetimelog </span>
+        <input type=text id=datetimelog>
+        <span> cad </span>
         <input type=text id=cad>
-        <span> Vehicle </span>
+        <span> vehicle </span>
         <input type=text id=vehicle>
-        <a href=# data-role=button id=insert> Insert the customer </a>
-        <a href=# data-role=button id=list> List customers </a>
+        <span> loc </span>
+        <input type=text id=loc>
+        <span> type </span>
+        <input type=text id=type>
+        <span> notes </span>
+        <input type=text id=notes>
+        <span> email </span>
+        <input type=text id=email>
+        <a href=# data-role=button id=insert> Insert the Overtime </a>
+        <a href=# data-role=button id=list> List Overtime </a>
     </div>
 </div>
 
@@ -57,8 +67,13 @@
         {
             var sql = "CREATE TABLE overtime " +
                     " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                    "cad VARCHAR(5) NOT NULL, " +
-                    "vehicle VARCHAR(6) NOT NULL)"
+                    "datetimelog DATETIME NOT NULL, " +
+                    "cad VARCHAR(5), " +
+                    "vehicle VARCHAR(10), " +
+                    "loc VARCHAR(100), " +
+                    "type VARCHAR(6) NOT NULL, " +
+                    "notes VARCHAR(250), " +
+                    "email VARCHAR(100)";
             transaction.executeSql (sql, undefined, function ()
             {
                 alert ("Table created");
@@ -71,7 +86,7 @@
         if (!confirm ("Delete table?", "")) return;;
         db.transaction (function (transaction)
         {
-            var sql = "DROP TABLE customers";
+            var sql = "DROP TABLE overtime";
             transaction.executeSql (sql, undefined, ok, error);
         });
     });
@@ -83,8 +98,8 @@
 
         db.transaction (function (transaction)
         {
-            var sql = "INSERT INTO overtime (cad, vehicle) VALUES (?, ?)";
-            transaction.executeSql (sql, [cad, vehicle], function ()
+            var sql = "INSERT INTO overtime (datetimelog, cad, vehicle, loc, type, notes, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            transaction.executeSql (sql, [datetimelog, cad, vehicle, loc, type, notes, email], function ()
             {
                 alert ("Log inserted");
             }, error);
@@ -105,9 +120,24 @@
                             for (var i = 0; i < result.rows.length; i++)
                             {
                                 var row = result.rows.item (i);
-                                var cad = row.lname;
-                                var vehicle = row.fname;
-                                html += "<li>" + cad + "&nbsp;" + vehicle + "</li>";
+                                var id = row.id;
+                                var datetimelog = row.datetimelog;
+                                var cad = row.cad;
+                                var vehicle = row.vehicle;
+                                var loc = row.loc;
+                                var type = row.type;
+                                var notes = row.notes;
+                                var email = row.email;
+                                html += "<li>" +
+                                        id + "&nbsp;" +
+                                        datetimelog + "&nbsp;" +
+                                        cad + "&nbsp;" +
+                                        vehicle +  "&nbsp;" +
+                                        loc + "&nbsp;" +
+                                        type + "&nbsp;" +
+                                        notes + "&nbsp;" +
+                                        email + "&nbsp;" +
+                                        "</li>";
                             }
                         }
                         else
