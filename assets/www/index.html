@@ -26,6 +26,30 @@
     <div data-role=content>
         <a href=# data-role=button id=create> Create overtime table </a>
         <a href=# data-role=button id=remove> Delete overtime table </a>
+
+        <div data-role="fieldcontain" data-controltype="selectmenu">
+            <label for="type">
+                Choose:
+            </label>
+            <select id="type" name="">
+                <option value="LF">
+                    Late Finish
+                </option>
+                <option value="ES">
+                    Early Start
+                </option>
+                <option value="OOO">
+                    Out of Area Meal Break
+                </option>
+                <option value="DMB">
+                    Disturbed Meal Break
+                </option>
+                <option value="LMB">
+                    Late Meal Break
+                </option>
+            </select>
+        </div>
+
         <span> datetimelog </span>
         <input type=datetime id=datetimelog value="2014-06-02 08:23:00">
         <span> cad </span>
@@ -34,8 +58,6 @@
         <input type=number id=vehicle>
         <span> loc </span>
         <input type=text id=loc>
-        <span> type </span>
-        <input type=text id=type>
         <span> notes </span>
         <input type=text id=notes>
         <span> email </span>
