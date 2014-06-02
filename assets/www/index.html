@@ -27,7 +27,7 @@
         <a href=# data-role=button id=create> Create overtime table </a>
         <a href=# data-role=button id=remove> Delete overtime table </a>
         <span> datetimelog </span>
-        <input type=text id=datetimelog>
+        <input type=text id=datetimelog value="2014-06-02 08:23:00">
         <span> cad </span>
         <input type=text id=cad>
         <span> vehicle </span>
@@ -73,7 +73,7 @@
                     "loc VARCHAR(100), " +
                     "type VARCHAR(6) NOT NULL, " +
                     "notes VARCHAR(250), " +
-                    "email VARCHAR(100)";
+                    "email VARCHAR(100))";
             transaction.executeSql (sql, undefined, function ()
             {
                 alert ("Table created");
