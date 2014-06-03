@@ -1,71 +1,119 @@
-// Wait for PhoneGap to load
-document.addEventListener("deviceready", onDeviceReady, false);
+<script>
 
-// PhoneGap is ready
-function onDeviceReady()
+var db = openDatabase ("Test", "1.0", "Test", 65535);
+
+$("#create").bind ("click", function (event)
     {
-        alert("DEBUGGING: we are in the onDeviceReady() function");
+        db.transaction (function (transaction)
+        {
+            var sql = "CREATE TABLE overtime " +
+                " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "datetimelog DATETIME, " +
+                "cad VARCHAR(5), " +
+                "vehicle VARCHAR(10), " +
+                "loc VARCHAR(100), " +
+                "type VARCHAR(6), " +
+                "notes VARCHAR(250), " +
+                "email VARCHAR(100))";
+            transaction.executeSql (sql, undefined, function ()
+            {
+                alert ("Table created");
+            }, error);
+        });
+        });
 
-        if (!window.openDatabase) {
-            // not all mobile devices support databases  if it does not, the following alert will display
-            // indicating the device will not be albe to run this application
-            alert('Databases are not supported on this device.');
-            return;
+$("#remove").bind ("click", function (event)
+    {
+        if (!confirm ("Delete table?", "")) return;;
+        db.transaction (function (transaction)
+        {
+        var sql = "DROP TABLE overtime";
+        transaction.executeSql (sql, undefined, ok, error);
+        });
+        });
+
+$("#insert").bind ("click", function (event)
+    {
+        var datetimelog = $("#datetimelog").val ();
+        var cad = $("#cad").val ();
+        var vehicle = $("#vehicle").val ();
+        var loc = $("#loc").val ();
+        var type = $("#type").val ();
+        var notes = $("#notes").val ();
+        var email = $("#email").val ();
+
+        db.transaction (function (transaction)
+        {
+        var sql = "INSERT INTO overtime (datetimelog, cad, vehicle, loc, type, notes, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        transaction.executeSql (sql, [datetimelog, cad, vehicle, loc, type, notes, email], function ()
+        {
+        alert ("Log inserted");
+        }, error);
+        });
+        });
+
+$("#list").bind ("click", function (event)
+    {
+        db.transaction (function (transaction)
+        {
+            var sql = "SELECT * FROM overtime";
+            transaction.executeSql (sql, undefined,
+                function (transaction, result)
+                {
+                    var html = "<ul>";
+                    if (result.rows.length)
+                    {
+                        for (var i = 0; i < result.rows.length; i++)
+                        {
+                            var row = result.rows.item (i);
+                            var id = row.id;
+                            var datetimelog = row.datetimelog;
+                            var cad = row.cad;
+                            var vehicle = row.vehicle;
+                            var loc = row.loc;
+                            var type = row.type;
+                            var notes = row.notes;
+                            var email = row.email;
+                            html += "<li>" +
+                                datetimelog + "&nbsp;" +
+                                cad + "&nbsp;" +
+                                vehicle +  "&nbsp;" +
+                                loc + "&nbsp;" +
+                                type + "&nbsp;" +
+                                notes + "&nbsp;" +
+                                email + "&nbsp;" +
+                                "</li>";
+                        }
+                    }
+                    else
+                    {
+                        html += "<li> No Logs </li>";
+                    }
+
+                    html += "</ul>";
+
+                    $("#win2").unbind ().bind ("pagebeforeshow", function ()
+                    {
+                        var $content = $("#win2 div:jqmData(role=content)");
+                        $content.html (html);
+                        var $ul = $content.find ("ul");
+                        $ul.listview ();
+                    });
+
+                    $.mobile.changePage ($("#win2"));
+
+                }, error);
+        });
+        });
+
+function ok ()
+    {
         }
 
-        var db = window.openDatabase("OTDB", "1.0", "Running OT Tracker DB", 65535);
-
-        alert("DEBUGGING: we now leaving the onDeviceReady() function");
-    }
-
-//Check DB table and create if not there
-function createTable(tx)
+function error (transaction, err)
     {
-        alert("DEBUGGING: we are in the createTable() function");
-        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
-        alert("DEBUGGING: we are now leaving the createTable() function");
-    }
+        alert ("DB error : " + err.message);
+        return false;
+        }
 
-function runCreateTable()
-    {
-        db.transaction(createTable, errorCB, successCB);
-    }
-
-// Transaction error callback
-function errorCB(tx, err)
-    {
-        alert("Error processing SQL: "+err);
-    }
-
-// Transaction success callback
-function successCB()
-    {
-        alert("success!");
-    }
-
-// Query the database
-function queryDB(tx)
-    {
-        alert("DEBUGGING: we are in the queryDB() function");
-        tx.executeSql('SELECT * FROM OTDB', [], querySuccess, QerrorCB);
-    }
-
-// Query the success callback
-function querySuccess(tx, results)
-    {
-        alert("DEBUGGING: we are in the querySuccess() function");
-        var len = results.rows.length;
-        alert("DEMO table: " + len + " rows found.");
-        for (var i=0; i<len; i++)
-            {
-                alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
-            }
-    }
-
-    // Transaction error callback
-    //
-    function QerrorCB(err) {
-        alert("Error querying SQL: "+err.code);
-    }
+</script>
