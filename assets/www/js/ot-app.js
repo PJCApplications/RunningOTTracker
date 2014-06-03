@@ -15,7 +15,7 @@ $("#create").bind ("click", function (event)
                 "type VARCHAR(6), " +
                 "notes VARCHAR(250), " +
                 "deleted VARCHAR(5), " +
-                "timestamp DATETIME, " +
+                "logtimestamp DATETIME, " +
                 "staffnumber VARCHAR(10))";
             transaction.executeSql (sql, undefined, function ()
             {
@@ -43,13 +43,13 @@ $("#insert").bind ("click", function (event)
         var type = $("#type").val ();
         var notes = $("#notes").val ();
         var deleted = "false";
-        var timestamp = $("#timestamp").val ();
+        var timestamp = $("#logtimestamp").val ();
         var staffnumber = "22309449";
 
         db.transaction (function (transaction)
         {
-        var sql = "INSERT INTO overtime (datetimelog, cad, vehicle, loc, type, notes, deleted, timestamp, staffnumber) VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?)";
-        transaction.executeSql (sql, [datetimelog, cad, vehicle, loc, type, notes, deleted, timestamp, staffnumber], function ()
+        var sql = "INSERT INTO overtime (datetimelog, cad, vehicle, loc, type, notes, deleted, logtimestamp, staffnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        transaction.executeSql (sql, [datetimelog, cad, vehicle, loc, type, notes, deleted, logtimestamp, staffnumber], function ()
         {
         alert ("Log inserted");
         }, error);
@@ -78,7 +78,7 @@ $("#list").bind ("click", function (event)
                             var type = row.type;
                             var notes = row.notes;
                             var deleted = row.deleted;
-                            var timestamp = row.timestamp;
+                            var logtimestamp = row.logtimestamp;
                             var staffnumber = row.staffnumber;
 
 
@@ -91,7 +91,7 @@ $("#list").bind ("click", function (event)
                                 type + "&nbsp;" +
                                 notes + "&nbsp;" +
                                 deleted + "&nbsp;" +
-                                timestamp + "&nbsp;" +
+                                logtimestamp + "&nbsp;" +
                                 staffnumber + "&nbsp;" +
                                 "</li>";
                         }
@@ -127,44 +127,44 @@ function error (transaction, err)
         return false;
         }
 
-function timestamp() {
-
-    var d = new Date();
-
-    var year = d.getFullYear();
-
-    var month = d.getMonth();
-    if (month <10)
-    {
-    month = "0" + month;
-    }
-
-    var date = d.getDate();
-    if (date < 10)
-    {
-    date = "0" + date;
-    }
-
-    var hours = d.getHours();
-    if (hours < 10)
-    {
-    hours = "0" + hours;
-    }
-
-    var minutes = d.getMinutes();
-    if (minutes < 10)
-    {
-    minutes = "0" + minutes;
-    }
-
-    var seconds = d.getSeconds();
-    if (seconds < 10)
-    {
-    seconds = "0" + seconds;
-    }
-
-
-    document.getElementById("timestamp").innerHTML = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+// function timestamp() {
+//
+//    var d = new Date();
+//
+//    var year = d.getFullYear();
+//
+//    var month = d.getMonth();
+//    if (month <10)
+//    {
+//    month = "0" + month;
+//    }
+//
+//    var date = d.getDate();
+//    if (date < 10)
+//    {
+//    date = "0" + date;
+//    }
+//
+//    var hours = d.getHours();
+//    if (hours < 10)
+//    {
+//    hours = "0" + hours;
+//    }
+//
+//    var minutes = d.getMinutes();
+//    if (minutes < 10)
+//    {
+//    minutes = "0" + minutes;
+//    }
+//
+//    var seconds = d.getSeconds();
+//    if (seconds < 10)
+//    {
+//    seconds = "0" + seconds;
+//    }
+//
+//
+//    document.getElementById("timestamp").innerHTML = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
     }
 
 </script>
