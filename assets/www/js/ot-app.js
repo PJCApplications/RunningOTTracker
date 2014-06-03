@@ -1,6 +1,6 @@
 <script>
 
-var db = openDatabase ("Test", "1.0", "Test", 65535);
+var db = openDatabase ("ROTT", "1.0", "ROTT", 65535);
 
 $("#create").bind ("click", function (event)
     {
@@ -14,10 +14,12 @@ $("#create").bind ("click", function (event)
                 "loc VARCHAR(100), " +
                 "type VARCHAR(6), " +
                 "notes VARCHAR(250), " +
-                "email VARCHAR(100))";
+                "deleted VARCHAR(5), " +
+                "timestamp DATETIME, " +
+                "staffnumber VARCHAR(10))";
             transaction.executeSql (sql, undefined, function ()
             {
-                alert ("Table created");
+                alert ("Table 'overtime' created");
             }, error);
         });
         });
@@ -40,12 +42,14 @@ $("#insert").bind ("click", function (event)
         var loc = $("#loc").val ();
         var type = $("#type").val ();
         var notes = $("#notes").val ();
-        var email = $("#email").val ();
+        var deleted = "false";
+        var timestamp = $("#timestamp").val ();
+        var staffnumber = "22309449";
 
         db.transaction (function (transaction)
         {
-        var sql = "INSERT INTO overtime (datetimelog, cad, vehicle, loc, type, notes, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        transaction.executeSql (sql, [datetimelog, cad, vehicle, loc, type, notes, email], function ()
+        var sql = "INSERT INTO overtime (datetimelog, cad, vehicle, loc, type, notes, deleted, timestamp, staffnumber) VALUES (?, ? ,?, ?, ?, ?, ?, ?, ?)";
+        transaction.executeSql (sql, [datetimelog, cad, vehicle, loc, type, notes, deleted, timestamp, staffnumber], function ()
         {
         alert ("Log inserted");
         }, error);
@@ -73,15 +77,22 @@ $("#list").bind ("click", function (event)
                             var loc = row.loc;
                             var type = row.type;
                             var notes = row.notes;
-                            var email = row.email;
+                            var deleted = row.deleted;
+                            var timestamp = row.timestamp;
+                            var staffnumber = row.staffnumber;
+
+
                             html += "<li>" +
+                                id + "&nbsp;" +
                                 datetimelog + "&nbsp;" +
                                 cad + "&nbsp;" +
                                 vehicle +  "&nbsp;" +
                                 loc + "&nbsp;" +
                                 type + "&nbsp;" +
                                 notes + "&nbsp;" +
-                                email + "&nbsp;" +
+                                deleted + "&nbsp;" +
+                                timestamp + "&nbsp;" +
+                                staffnumber + "&nbsp;" +
                                 "</li>";
                         }
                     }
